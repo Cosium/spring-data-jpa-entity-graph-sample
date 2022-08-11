@@ -1,6 +1,6 @@
 package com.cosium.spring_data_jpa_entity_graph_sample;
 
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphs;
+import com.cosium.spring.data.jpa.entity.graph.domain2.NamedEntityGraph;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class ProductController {
 	public ResponseEntity<?> list(@RequestParam(name = "with_brand", required = false, defaultValue = "false") boolean withBrand) {
 		Iterable<Product> products;
 		if (withBrand) {
-			products = repository.findAll(EntityGraphs.named(Product.WITH_BRAND_EG));
+			products = repository.findAll(NamedEntityGraph.loading(Product.WITH_BRAND_EG));
 		} else {
 			products = repository.findAll();
 		}
